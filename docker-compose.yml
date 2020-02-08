@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+    ch-node-1:
+        container_name: ch-node1
+        ports:
+            - "8123:8123"
+        build:
+            context: .
+            dockerfile: ch-node1.dockerfile
+            args:
+                buildno: 1
+
+        networks:
+            ch_lan:
+                ipv4_address: 10.92.100.90
+                aliases:
+                    - ch-node01            
+networks:
+    ch_lan:
+        name: bridge_ch_lan
+        driver: bridge 
+        ipam:
+            config:
+              - subnet: 10.92.100.0/24
+                #ip_range: 10.92.100.0/24
+                #gateway: 10.92.100.1
+                #aux_addresses:
+                #    host1: 10.92.100.10
+                #    host2: 10.92.100.11
+                #    host3: 10.92.100.12
+
+#docker-compose run --use-aliases ch-node-1
+#docker exec -t -i docker-clickhouse-cluster_ch-server_1 /bin/bash
+#docker start docker-clickhouse-cluster_ch-server_1
+#docker attach docker-clickhouse-cluster_ch-server_1
+#https://github.com/sonych/clickhouse-cluster
