@@ -9,7 +9,8 @@ services:
             dockerfile: ch-node1.dockerfile
             args:
                 buildno: 1
-
+        volumes:
+            - "./ch-node1/ch-data:/var/lib/clickhouse"
         networks:
             ch_lan:
                 ipv4_address: 10.92.100.90
@@ -28,9 +29,3 @@ networks:
                 #    host1: 10.92.100.10
                 #    host2: 10.92.100.11
                 #    host3: 10.92.100.12
-
-#docker-compose run --use-aliases ch-node-1
-#docker exec -t -i docker-clickhouse-cluster_ch-server_1 /bin/bash
-#docker start docker-clickhouse-cluster_ch-server_1
-#docker attach docker-clickhouse-cluster_ch-server_1
-#https://github.com/sonych/clickhouse-cluster
