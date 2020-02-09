@@ -7,7 +7,7 @@ RUN yum -y install sudo
 RUN yum -y install yum-utils
 RUN rpm --import https://repo.yandex.ru/clickhouse/CLICKHOUSE-KEY.GPG
 RUN yum-config-manager --add-repo https://repo.yandex.ru/clickhouse/rpm/stable/x86_64
-RUN yum -y install clickhouse-server clickhouse-client
+RUN yum -y install clickhouse-server-20.1.3.7-2 clickhouse-client-20.1.3.7-2
 COPY ch-node1/config.xml /etc/clickhouse-server
 
 #set root passwd

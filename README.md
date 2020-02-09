@@ -12,15 +12,18 @@ https://github.com/ClickHouse/ClickHouse/issues/721
 
 ## References
 https://github.com/sonych/clickhouse-cluster
+https://clickhouse.tech/docs/en/development/architecture/#merge-tree
+https://en.wikipedia.org/wiki/Log-structured_merge-tree
+
 
 
 ## Sample Docker Commands
 
 ### connect to container shell
-`docker exec -t -i docker-clickhouse-cluster_ch-server_1 /bin/bash`
+`docker exec -it ch-node1 /bin/bashh`
 
 ### build from docker file
-`docker build -t ch-node1 -f TestNode.dockerfile .`
+`docker build -t ch-node1 -f ch-node1.dockerfile .`
 
 ### run container
 `docker run -d --name clickhouse-node1 clickhouse-node1`
@@ -42,4 +45,4 @@ https://github.com/sonych/clickhouse-cluster
 `docker-compose up --build`
 
 ### attach to a container 
-`docker attach docker-clickhouse-cluster_ch-server_1`
+`docker attach ch-node1`
