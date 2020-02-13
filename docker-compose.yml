@@ -1,21 +1,75 @@
 version: "3.7"
 services:
-    ch-node-1:
+    ch-node1:
         container_name: ch-node1
         ports:
-            - "8123:8123"
+            - "9001:8123"
         build:
             context: .
             dockerfile: ch-node1.dockerfile
-            args:
-                buildno: 1
         volumes:
             - "./ch-node1/ch-data:/var/lib/clickhouse"
         networks:
             ch_lan:
+                ipv4_address: 10.92.100.91
+                aliases:
+                    - ch-node1
+    ch-node2:
+        container_name: ch-node2
+        ports:
+            - "9002:8123"
+        build:
+            context: .
+            dockerfile: ch-node2.dockerfile
+        volumes:
+            - "./ch-node2/ch-data:/var/lib/clickhouse"
+        networks:
+            ch_lan:
+                ipv4_address: 10.92.100.92
+                aliases:
+                    - ch-node2
+    ch-node3:
+        container_name: ch-node3
+        ports:
+            - "9003:8123"
+        build:
+            context: .
+            dockerfile: ch-node3.dockerfile
+        volumes:
+            - "./ch-node3/ch-data:/var/lib/clickhouse"
+        networks:
+            ch_lan:
+                ipv4_address: 10.92.100.93
+                aliases:
+                    - ch-node3
+                    
+    ch-node4:
+        container_name: ch-node4
+        ports:
+            - "9004:8123"
+        build:
+            context: .
+            dockerfile: ch-node4.dockerfile
+        volumes:
+            - "./ch-node4/ch-data:/var/lib/clickhouse"
+        networks:
+            ch_lan:
+                ipv4_address: 10.92.100.94
+                aliases:
+                    - ch-node4                  
+    ch-zknode1:
+        container_name: ch-zknode1
+        build:
+            context: .
+            dockerfile: ch-zknode1.dockerfile
+        volumes:
+            - "./ch-zknode1/zk-data:/opt/zookeeper/data"            
+        networks:
+            ch_lan:
                 ipv4_address: 10.92.100.90
                 aliases:
-                    - ch-node01            
+                    - ch-zknode1
+
 networks:
     ch_lan:
         name: bridge_ch_lan

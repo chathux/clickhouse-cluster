@@ -1,4 +1,7 @@
 ## Configuration
+system reload config
+select * from system.zookeeper
+
 
 ### config.xml
 - since docker ipv6 is disabled. if not set cant access port mapping from localhost.  
@@ -9,11 +12,23 @@ https://github.com/ClickHouse/ClickHouse/issues/721
 - enabled default response to open http://ui.tabix.io/  
 `<http_server_default_response><![CDATA[<html ng-app="SMI2"><head><base href="http://ui.tabix.io/"></head><body><div ui-view="" class="content-ui"></div><script src="http://loader.tabix.io/master.js"></script></body></html>]]></http_server_default_response>`
 
+- zookeeper configuration  
+make sure to remove `incl="zookeeper-servers" optional="true" ` from the tag.
+
+        <zookeeper>
+            <node>
+                <host>ch-zknode1</host>
+                <port>2181</port>
+            </node>
+        </zookeeper>
 
 ## References
 https://github.com/sonych/clickhouse-cluster
 https://clickhouse.tech/docs/en/development/architecture/#merge-tree
 https://en.wikipedia.org/wiki/Log-structured_merge-tree
+
+https://www.altinity.com/blog/2018/5/10/circular-replication-cluster-topology-in-clickhouse
+
 
 
 

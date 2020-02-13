@@ -12,7 +12,6 @@ COPY ch-node1/config.xml /etc/clickhouse-server
 
 #set root passwd
 RUN echo "root":"root" | chpasswd
-EXPOSE 8123/tcp
 USER clickhouse
 CMD ["clickhouse-server", "--config-file=/etc/clickhouse-server/config.xml"]
 #CMD ["sudo", "-u clickhouse" ,"clickhouse-server", "--config-file=/etc/clickhouse-server/config.xml"]
