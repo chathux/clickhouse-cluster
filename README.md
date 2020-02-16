@@ -1,6 +1,14 @@
 ## Configuration
-system reload config
-select * from system.zookeeper
+
+### Shards Available
+
+Below listed shards are created in the config.xml file.
+
+- two_nodes_two_shards 
+- three_nodes_one_shard_replicated
+
+system reload config;  
+select * from system.zookeeper;
 
 
 ### config.xml
@@ -21,6 +29,8 @@ make sure to remove `incl="zookeeper-servers" optional="true" ` from the tag.
                 <port>2181</port>
             </node>
         </zookeeper>
+
+
 
 ## References
 https://github.com/sonych/clickhouse-cluster

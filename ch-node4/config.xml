@@ -176,66 +176,60 @@
          https://clickhouse.yandex/docs/en/table_engines/distributed/
       -->
     <remote_servers incl="clickhouse_remote_servers" >
-        <!-- Test only shard config for testing distributed storage -->
-        <test_shard_localhost>
+        <four_nodes_one_shard_replicated>
             <shard>
-                <replica>
-                    <host>localhost</host>
-                    <port>9000</port>
-                </replica>
-            </shard>
-        </test_shard_localhost>
-        <test_cluster_two_shards_localhost>
-             <shard>
-                 <replica>
-                     <host>localhost</host>
-                     <port>9000</port>
-                 </replica>
-             </shard>
-             <shard>
-                 <replica>
-                     <host>localhost</host>
-                     <port>9000</port>
-                 </replica>
-             </shard>
-        </test_cluster_two_shards_localhost>
-        <test_cluster_two_shards>
-            <shard>
-                <replica>
-                    <host>127.0.0.1</host>
-                    <port>9000</port>
-                </replica>
+            <internal_replication>true</internal_replication>            
+            <replica>
+                <default_database>circular_primary</default_database>
+                <host>ch-node1</host>
+                <port>9000</port>
+            </replica>
+            <replica>
+                <default_database>circular_replicated</default_database>
+                <host>ch-node2</host>
+                <port>9000</port>                
+            </replica>
             </shard>
             <shard>
-                <replica>
-                    <host>127.0.0.2</host>
-                    <port>9000</port>
-                </replica>
-            </shard>
-        </test_cluster_two_shards>
-        <test_shard_localhost_secure>
+            <internal_replication>true</internal_replication>            
+            <replica>
+                <default_database>circular_primary</default_database>
+                <host>ch-node2</host>
+                <port>9000</port>                
+            </replica>
+            <replica>
+                <default_database>circular_replicated</default_database>
+                <host>ch-node3</host>
+                <port>9000</port>                
+            </replica>
+            </shard>  
             <shard>
-                <replica>
-                    <host>localhost</host>
-                    <port>9440</port>
-                    <secure>1</secure>
-                </replica>
-            </shard>
-        </test_shard_localhost_secure>
-        <test_unavailable_shard>
+            <internal_replication>true</internal_replication>            
+            <replica>
+                <default_database>circular_primary</default_database>
+                <host>ch-node3</host>
+                <port>9000</port>                
+            </replica>
+            <replica>
+                <default_database>circular_replicated</default_database>
+                <host>ch-node4</host>
+                <port>9000</port>
+            </replica>
+            </shard>   
             <shard>
-                <replica>
-                    <host>localhost</host>
-                    <port>9000</port>
-                </replica>
-            </shard>
-            <shard>
-                <replica>
-                    <host>localhost</host>
-                    <port>1</port>
-                </replica>
-            </shard>
-        </test_unavailable_shard>
+            <internal_replication>true</internal_replication>            
+            <replica>
+                <default_database>circular_primary</default_database>
+                <host>ch-node4</host>
+                <port>9000</port>
+            </replica>
+            <replica>
+                <default_database>circular_replicated</default_database>
+                <host>ch-node1</host>
+                <port>9000</port>
+            </replica>
+            </shard>                                    
+        </four_nodes_one_shard_replicated>
     </remote_servers>
 
 
@@ -262,7 +256,9 @@
 
          See https://clickhouse.yandex/docs/en/table_engines/replication/#creating-replicated-tables
       -->
-    <macros incl="macros" optional="true" />
+    <macros>
+        <shard>4</shard>
+    </macros>
 
 
     <!-- Reloading interval for embedded dictionaries, in seconds. Default: 3600. -->
